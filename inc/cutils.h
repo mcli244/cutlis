@@ -44,31 +44,29 @@ base on:
 ******************************************************************/
 
 /******************** File operation *****************************/
-extern char *file_read(char *filename);
-extern int file_write(char *filename, char *content, int length);
-extern int file_size(char *filename, long *out);
-// extern int dir_read(dir_read_t *dir_read, char *dirname);
-// extern void dir_read_clean(dir_read_t *dir_read);
+extern char *cutil_freadAll(char *filename);
+extern int cutil_fwriteAll(char *filename, char *content, int length);
+extern int cutil_getFileSize(char *filename, long *out);
 
 /******************** String processing **************************/
-extern char* string_format(char *format, ...);
+extern char* cutil_stringFormat(char *format, ...);
 // extern char** string_split(char* s, char* delim, int* out);
-extern char* string_repeat(char* s, int count);
-extern char* string_join(char** arr, char* sep, size_t length);
-extern int string_ends_with(char* str, char* suffix);
-extern int string_starts_with(char* str, char* prefix);
+extern char* cutil_stringRepeat(char* s, int count);
+extern char* cutil_stringJoin(char** arr, char* sep, size_t length);
+extern int cutil_stringEndsWith(char* str, char* suffix);
+extern int cutil_stringStartsWith(char* str, char* prefix);
 
 /******************** array processing **************************/
-#define GET_ARRAY_LEN(array) (sizeof(array) / sizeof(array[0]))
-extern int array_max(int* array, size_t length);
-extern int array_min(int* array, size_t length);
+#define CUTIL_ARRAY_LEN(array) (sizeof(array) / sizeof(array[0]))
+extern int cutil_arrayMax(int* array, size_t length);
+extern int cutil_arrayMin(int* array, size_t length);
 
 /************************* other  ******************************/
-extern char random_char(char* str, size_t str_length);
-extern int random_int(int min, int max);
-extern void simple_free(void *__ptr);
-extern void *simple_malloc(size_t size);
-extern char *strdup_safe(const char *str);
+extern char cutil_randomChar(char* str, size_t str_length);
+extern int cutil_randomInt(int min, int max);
+extern void cutil_simpleFree(void *__ptr);
+extern void *cutil_simpleMalloc(size_t size);
+extern char *cutil_simpleStrdup(const char *str);
 
 #ifdef __cplusplus
 }
