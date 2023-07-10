@@ -75,6 +75,56 @@ int cutil_getFileSize(char *filename, long *out)
   return 0;
 }
 
+int cutil_getFilePath(const char *inFileName, char *outPathBuf, int outPathBufSize)
+{
+    if(!inFileName || !outPathBuf || !outPathBufSize)
+        return -1;
+
+    strncpy(outPathBuf, inFileName, outPathBufSize);
+
+    char *p = strrchr(outPathBuf, '/');;
+    if (p != NULL) {
+            *p = '\0';
+    }
+    else
+        return -1;
+    return 0;
+}
+
+int cutil_getFileNameBySuffix(const char *directory, char *suffix, char *outFileName, int outPathBufSize)
+{
+    DIR * dir;
+    char* extension;
+
+    if(!directory || !suffix || !outFileName || !outPathBufSize)
+        return -1;
+    
+    struct dirent * ptr;
+    dir = opendir(directory);
+    while((ptr = readdir(dir)) != NULL)
+    {
+        if(strcmp(ptr->d_name,".")==0||strcmp(ptr->d_name,"..")==0)
+        {
+            continue;
+        }
+        if(ptr->d_type == DT_REG)
+        {
+            extension = strrchr(ptr->d_name, '.');
+            if (extension != NULL && 0 == strcmp(extension+1, suffix)) {
+                strncpy(outFileName, ptr->d_name, outPathBufSize);
+                goto exit;
+            }
+        }
+        
+    }
+    closedir(dir);
+    return -1;
+
+exit:
+    closedir(dir);
+    return 0;
+}
+
 /******************** String processing **************************/
 
 /**

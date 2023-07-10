@@ -1,3 +1,9 @@
+/*
+ * @Author: lixiangjun.michael@foxmial.com
+ * @Date: 2023-07-06 09:58:41
+ * @FilePath: cutils.h
+ * @Description: Description
+ */
 /* ============================================================================
  * 
  * Copyright (c) 2023 LXJ
@@ -47,6 +53,9 @@ base on:
 extern char *cutil_freadAll(char *filename);
 extern int cutil_fwriteAll(char *filename, char *content, int length);
 extern int cutil_getFileSize(char *filename, long *out);
+extern int cutil_getFileNameBySuffix(const char *directory, char *suffix, char *outFileName, int outPathBufSize);
+extern int cutil_getFilePath(const char *inFileName, char *outPathBuf, int outPathBufSize);
+
 
 /******************** String processing **************************/
 extern char* cutil_stringFormat(char *format, ...);
