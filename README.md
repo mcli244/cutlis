@@ -1,3 +1,9 @@
+<!--
+ * @Author       : lixiangjun.michael@foxmial.com
+ * @Date         : 2023-07-12
+ * @FilePath     : README.md
+ * @Description  : Description
+-->
 cutlis
 ---
 Some small tools written in C language
@@ -30,3 +36,5 @@ Some small tools written in C language
 - extern void cutil_simpleFree(void *__ptr);
 - extern void *cutil_simpleMalloc(size_t size);
 - extern char *cutil_simpleStrdup(const char *str);
+- extern int cutil_stringGetSize(uint64_t size, const enum string_size_units units,char *buf, int len);
+- extern void cutils_printHexDumpBytes(const char *prefix_str, int prefix_type, const void *buf, size_t len);
