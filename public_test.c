@@ -14,15 +14,15 @@ int main(int argc, char **argv)
     long fileSize = 0;
     char *str = NULL;
 
-    ret = cutil_fwriteAll("./test.txt", "This is a test file", strlen("This is a test file"));
-    printf("file_write ret:%d\n", ret);
+    // ret = cutil_fwriteAll("./test.txt", "This is a test file", strlen("This is a test file"));
+    // printf("file_write ret:%d\n", ret);
 
-    ret = cutil_getFileSize("./test.txt", &fileSize);
-    printf("file_size:%ld ret:%d\n", fileSize, ret);
+    // ret = cutil_getFileSize("./test.txt", &fileSize);
+    // printf("file_size:%ld ret:%d\n", fileSize, ret);
 
-    str = cutil_freadAll("./test.txt");
-    printf("file_read:[%s]\n", str);
-    cutil_simpleFree(str);
+    // str = cutil_freadAll("./test.txt");
+    // printf("file_read:[%s]\n", str);
+    // cutil_simpleFree(str);
 
     str = cutil_stringFormat("This is test %d %s %f", 123, "string", 3.14);
     printf("string_format:[%s]\n", str);
@@ -72,6 +72,22 @@ int main(int argc, char **argv)
     sleep(1);
     printf("random_int:%d\n", cutil_randomInt(0, 100));
     
+    char buf[100];
 
+    cutil_stringGetSize(123, STRING_UNITS_2, buf, sizeof(buf));
+    printf("buf[%s]\n", buf);
+
+    cutil_stringGetSize(123456789, STRING_UNITS_2, buf, sizeof(buf));
+    printf("buf[%s]\n", buf);
+
+    cutil_stringGetSize(0xFFFFFFFF, STRING_UNITS_2, buf, sizeof(buf));
+    printf("buf[%s]\n", buf);
+
+    cutil_stringGetSize(0xFFFFFFFFFFFFFFFF, STRING_UNITS_2, buf, sizeof(buf));
+    printf("buf[%s]\n", buf);
+
+    cutil_stringGetSize(0xFFFFFFFFFFFFFFFF, STRING_UNITS_10, buf, sizeof(buf));
+    printf("buf[%s]\n", buf);
+    
     return 0;
 }

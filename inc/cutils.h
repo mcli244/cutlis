@@ -37,11 +37,20 @@
 #include <dirent.h>
 #include <stdarg.h>
 #include <setjmp.h>
+#include <stdint.h>
 #include <time.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/* Descriptions of the types of units to
+ * print in */
+enum string_size_units {
+	STRING_UNITS_10,	/* use powers of 10^3 (standard SI) */
+	STRING_UNITS_2,		/* use binary powers of 2^10 */
+};
+
 
 /*****************************************************************
 Thanks for the following items
@@ -76,7 +85,7 @@ extern int cutil_randomInt(int min, int max);
 extern void cutil_simpleFree(void *__ptr);
 extern void *cutil_simpleMalloc(size_t size);
 extern char *cutil_simpleStrdup(const char *str);
-
+extern int cutil_stringGetSize(uint64_t size, const enum string_size_units units,char *buf, int len);
 #ifdef __cplusplus
 }
 #endif

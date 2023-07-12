@@ -4,7 +4,7 @@
  # @Date: 2021-09-29 11:44:09
  # @LastEditors: Please set LastEditors
  # @Description: In User Settings Edit
- # @FilePath: /open_fota/make.sh
+ # @FilePath: make.sh
 ### 
 
 
