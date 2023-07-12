@@ -4,8 +4,6 @@ project (demo)
 
 set (TAGET public_test)
 
-set (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-
 add_definitions(-g)
 add_definitions(-DNDEBUG -D__USE_FILE_OFFSET64)
 aux_source_directory (./ TOP_SRC)
@@ -28,3 +26,10 @@ target_link_libraries(${TAGET}
 		pthread
 		m
 		)
+
+  install(TARGETS ${TAGET}
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+    RUNTIME DESTINATION bin
+    PUBLIC_HEADER DESTINATION include  # 头文件安装路径
+)
