@@ -38,11 +38,25 @@
 #include <stdarg.h>
 #include <setjmp.h>
 #include <stdint.h>
+#include <ctype.h>
+#include <stdbool.h>
 #include <time.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+extern const char hex_asc[];
+#define hex_asc_lo(x)	hex_asc[((x) & 0x0f)]
+#define hex_asc_hi(x)	hex_asc[((x) & 0xf0) >> 4]
+#define max(x,y) (x > y ? x : y) 
+#define min(x,y) (x < y ? x : y)
+
+enum {
+	DUMP_PREFIX_NONE,
+	DUMP_PREFIX_ADDRESS,
+	DUMP_PREFIX_OFFSET
+};
 
 /* Descriptions of the types of units to
  * print in */
@@ -86,6 +100,7 @@ extern void cutil_simpleFree(void *__ptr);
 extern void *cutil_simpleMalloc(size_t size);
 extern char *cutil_simpleStrdup(const char *str);
 extern int cutil_stringGetSize(uint64_t size, const enum string_size_units units,char *buf, int len);
+extern void cutils_printHexDumpBytes(const char *prefix_str, int prefix_type, const void *buf, size_t len);
 #ifdef __cplusplus
 }
 #endif

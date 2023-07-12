@@ -69,8 +69,8 @@ int main(int argc, char **argv)
 
     // base on time
     printf("random_int:%d\n", cutil_randomInt(0, 100));
-    sleep(1);
-    printf("random_int:%d\n", cutil_randomInt(0, 100));
+    // sleep(1);
+    // printf("random_int:%d\n", cutil_randomInt(0, 100));
     
     char buf[100];
 
@@ -83,11 +83,22 @@ int main(int argc, char **argv)
     cutil_stringGetSize(0xFFFFFFFF, STRING_UNITS_2, buf, sizeof(buf));
     printf("buf[%s]\n", buf);
 
+    cutil_stringGetSize(0xFFFFFFFF, STRING_UNITS_10, buf, sizeof(buf));
+    printf("buf[%s]\n", buf);
+
     cutil_stringGetSize(0xFFFFFFFFFFFFFFFF, STRING_UNITS_2, buf, sizeof(buf));
     printf("buf[%s]\n", buf);
 
     cutil_stringGetSize(0xFFFFFFFFFFFFFFFF, STRING_UNITS_10, buf, sizeof(buf));
     printf("buf[%s]\n", buf);
+    
+    uint8_t dat[256];
+    for(int i=0; i<sizeof(dat); i++)
+        dat[i] = i;
+        
+    cutils_printHexDumpBytes("this is prefix ", DUMP_PREFIX_NONE, dat, sizeof(dat));
+    cutils_printHexDumpBytes("this is prefix ", DUMP_PREFIX_ADDRESS, dat, sizeof(dat));
+    cutils_printHexDumpBytes("this is prefix ", DUMP_PREFIX_OFFSET, dat, sizeof(dat));
     
     return 0;
 }
