@@ -6,23 +6,12 @@
  */
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 #include "cutils.h"
 
 int main(int argc, char **argv)
 {
-    int ret = -1;
-    long fileSize = 0;
     char *str = NULL;
-
-    // ret = cutil_fwriteAll("./test.txt", "This is a test file", strlen("This is a test file"));
-    // printf("file_write ret:%d\n", ret);
-
-    // ret = cutil_getFileSize("./test.txt", &fileSize);
-    // printf("file_size:%ld ret:%d\n", fileSize, ret);
-
-    // str = cutil_freadAll("./test.txt");
-    // printf("file_read:[%s]\n", str);
-    // cutil_simpleFree(str);
 
     str = cutil_stringFormat("This is test %d %s %f", 123, "string", 3.14);
     printf("string_format:[%s]\n", str);
@@ -99,6 +88,30 @@ int main(int argc, char **argv)
     cutils_printHexDumpBytes("this is prefix ", DUMP_PREFIX_NONE, dat, sizeof(dat));
     cutils_printHexDumpBytes("this is prefix ", DUMP_PREFIX_ADDRESS, dat, sizeof(dat));
     cutils_printHexDumpBytes("this is prefix ", DUMP_PREFIX_OFFSET, dat, sizeof(dat));
+
+    int ret = -1;
+    long fileSize = 0;
     
+
+    char *testFile = "../../test.txt";
+    ret = cutil_fwriteAll(testFile, "This is a test file", strlen("This is a test file"));
+    printf("file_write ret:%d\n", ret);
+
+    ret = cutil_getFileSize(testFile, &fileSize);
+    printf("file_size:%ld ret:%d\n", fileSize, ret);
+
+    str = cutil_freadAll(testFile);
+    printf("file_read:[%s]\n", str);
+    cutil_simpleFree(str);
+
+    char *FileAbsolutePath = NULL;
+    if(cutil_isExist(testFile))
+    {
+        FileAbsolutePath = cutil_getFileAbsolutePath(testFile);
+        printf("cutil_getSuffix(FileAbsolutePath):[%s]\n", cutil_getSuffix(FileAbsolutePath));
+        printf("cutil_rmSuffix(FileAbsolutePath):[%s]\n", cutil_rmSuffix(FileAbsolutePath));
+        cutil_simpleFree(FileAbsolutePath);
+    }
+
     return 0;
 }

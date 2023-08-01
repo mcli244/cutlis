@@ -4,7 +4,7 @@
  * @FilePath     : README.md
  * @Description  : Description
 -->
-cutlis
+cutlis                 
 ---
 Some small tools written in C language
 
@@ -13,8 +13,12 @@ Some small tools written in C language
 - extern char *cutil_freadAll(char *filename);
 - extern int cutil_fwriteAll(char *filename, char *content, int length);
 - extern int cutil_getFileSize(char *filename, long *out);
-- extern int cutil_getFileNameBySuffix(const char *directory, char *suffix, char *outFileName, int outPathBufSize);
-- extern int cutil_getFilePath(const char *inFileName, char *outPathBuf, int outPathBufSize);
+- extern int cutil_getFileNameBySuffix(const char *directory, char *suffix, char - *outFileName, int outPathBufSize);
+- extern int cutil_getFilePath(const char *inFileName, char *outPathBuf, int - outPathBufSize);
+- extern bool cutil_isExist(const char *file);
+- extern const char* cutil_getSuffix(const char* file_name);
+- extern char* cutil_rmSuffix(char* file_name);
+- extern char* cutil_getFileAbsolutePath(const char *file);
 
 
 # String processing

@@ -1,3 +1,15 @@
+
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+#include <stdarg.h>
+#include <setjmp.h>
+#include <ctype.h>
+#include <time.h>
+#include <string.h>
+
 #include "cutils.h"
 
 /******************** File operation *****************************/
@@ -123,6 +135,47 @@ int cutil_getFileNameBySuffix(const char *directory, char *suffix, char *outFile
 exit:
     closedir(dir);
     return 0;
+}
+
+bool cutil_isExist(const char *file)
+{
+	if (file == NULL)
+		return false;
+
+	if (access(file, F_OK) == 0)
+		return true;
+	return false;
+}
+
+const char* cutil_getSuffix(const char* file_name) 
+{
+    const char* extension = strrchr(file_name, '.');
+    if (extension == NULL) {
+        return "";
+    }
+    return extension + 1;
+}
+
+char* cutil_rmSuffix(char* file_name) 
+{
+    char* extension = strrchr(file_name, '.');
+    if (extension != NULL) {
+        *extension = '\0';
+    }
+    return file_name;
+}
+
+/*It needs to be free after use is not completed*/
+char* cutil_getFileAbsolutePath(const char *file)
+{
+    char *absolute_path = (char *)cutil_simpleMalloc(PATH_MAX);
+  
+    if (realpath(file, absolute_path) == NULL){
+        perror("Failed to get absolute path");
+        return NULL;
+    }
+  
+    return absolute_path;
 }
 
 /******************** String processing **************************/

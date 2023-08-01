@@ -31,16 +31,8 @@
 #ifndef __CUTILS_H__
 #define __CUTILS_H__
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <dirent.h>
-#include <stdarg.h>
-#include <setjmp.h>
 #include <stdint.h>
-#include <ctype.h>
 #include <stdbool.h>
-#include <time.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -78,7 +70,10 @@ extern int cutil_fwriteAll(char *filename, char *content, int length);
 extern int cutil_getFileSize(char *filename, long *out);
 extern int cutil_getFileNameBySuffix(const char *directory, char *suffix, char *outFileName, int outPathBufSize);
 extern int cutil_getFilePath(const char *inFileName, char *outPathBuf, int outPathBufSize);
-
+extern bool cutil_isExist(const char *file);
+extern const char* cutil_getSuffix(const char* file_name);
+extern char* cutil_rmSuffix(char* file_name);
+extern char* cutil_getFileAbsolutePath(const char *file);
 
 /******************** String processing **************************/
 extern char* cutil_stringFormat(char *format, ...);
