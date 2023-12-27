@@ -8,6 +8,7 @@
 #include <setjmp.h>
 #include <ctype.h>
 #include <time.h>
+#include <sys/time.h>
 #include <string.h>
 
 #include "cutils.h"
@@ -719,3 +720,50 @@ void cutils_printHexDumpBytes(const char *prefix_str, int prefix_type,
 	print_hex_dump("", prefix_str, prefix_type, 16, 1,
 			buf, len, 1);
 }
+
+
+char* cutils_get_timestamp(void)
+{
+    static char timestr[200] ={0};
+    struct tm * pTempTm;
+    struct timeval time;
+        
+    gettimeofday(&time,NULL);
+    pTempTm = localtime(&time.tv_sec);
+    if( NULL != pTempTm )
+    {
+        snprintf(timestr,199,"%04d-%02d-%02d %02d:%02d:%02d.%06ld",
+            pTempTm->tm_year+1900,
+            pTempTm->tm_mon+1, 
+            pTempTm->tm_mday,
+            pTempTm->tm_hour, 
+            pTempTm->tm_min, 
+            pTempTm->tm_sec,
+            time.tv_usec);
+    }
+    return timestr;
+}
+
+
+size_t cutils_get_ms(void)
+{
+    struct timespec ts;
+
+    // 获取当前时间
+    clock_gettime(CLOCK_REALTIME, &ts);
+
+    // 将秒数转换为毫秒并输出
+    return (ts.tv_sec * 1000LL + ts.tv_nsec / 1000000);
+}
+
+size_t cutils_get_us(void)
+{
+    struct timespec ts;
+
+    // 获取当前时间
+    clock_gettime(CLOCK_REALTIME, &ts);
+
+    // 将秒数转换为毫秒并输出
+    return (ts.tv_sec * 1000 * 1000LL + ts.tv_nsec / 1000);
+}
+

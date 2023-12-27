@@ -96,6 +96,15 @@ extern void *cutil_simpleMalloc(size_t size);
 extern char *cutil_simpleStrdup(const char *str);
 extern int cutil_stringGetSize(uint64_t size, const enum string_size_units units,char *buf, int len);
 extern void cutils_printHexDumpBytes(const char *prefix_str, int prefix_type, const void *buf, size_t len);
+extern char* cutils_get_timestamp(void);
+extern size_t cutils_get_ms(void);
+extern size_t cutils_get_us(void);
+
+#define offsetof(TYPE, MEMBER) ((size_t) &((TYPE *)0)->MEMBER)
+#define container_of(ptr, type, member) ({			\
+			const typeof( ((type *)0)->member ) *__mptr = (ptr);	\
+			(type *)( (char *)__mptr - offsetof(type,member) );})
+
 #ifdef __cplusplus
 }
 #endif

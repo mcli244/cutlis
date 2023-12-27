@@ -22,6 +22,7 @@ add_executable(${TAGET}
 			${SRC_LIST}
 			)
 
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
 target_link_libraries(${TAGET}
 		pthread
 		m

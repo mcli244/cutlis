@@ -9,6 +9,19 @@
 #include <string.h>
 #include "cutils.h"
 
+typedef struct profile
+{
+	char *name;
+	unsigned int age;
+	char *sex;
+}profile_t;
+
+static profile_t prop = {
+	.name = "wzc",
+	.age = 18,
+	.sex = "male"
+};
+
 int main(int argc, char **argv)
 {
     char *str = NULL;
@@ -112,6 +125,19 @@ int main(int argc, char **argv)
         printf("cutil_rmSuffix(FileAbsolutePath):[%s]\n", cutil_rmSuffix(FileAbsolutePath));
         cutil_simpleFree(FileAbsolutePath);
     }
+
+    profile_t *p = container_of(&prop.sex, struct profile, sex);
+	printf("name = %s, age = %u, sex = %s\n", p->name, p->age, p->sex);
+	printf("This number is = %d\n", ({1;2;3;4;}));
+
+    profile_t *q = container_of(&prop.age, struct profile, age);
+	printf("name = %s, age = %u, sex = %s\n", q->name, q->age, q->sex);
+	printf("This number is = %d\n", ({1;2;3;4;}));
+
+    printf("cutils_get_timestamp:%s\n", cutils_get_timestamp());
+    printf("cutils_get_timestamp:%s\n", cutils_get_timestamp());
+    printf("cutils_get_ms:%ld\n", cutils_get_ms());
+    printf("cutils_get_us:%ld\n", cutils_get_us());
 
     return 0;
 }

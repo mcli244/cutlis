@@ -42,3 +42,6 @@ Some small tools written in C language
 - extern char *cutil_simpleStrdup(const char *str);
 - extern int cutil_stringGetSize(uint64_t size, const enum string_size_units units,char *buf, int len);
 - extern void cutils_printHexDumpBytes(const char *prefix_str, int prefix_type, const void *buf, size_t len);
+- extern char* cutils_get_timestamp(void);
+- extern size_t cutils_get_ms(void);
+- extern size_t cutils_get_us(void);
